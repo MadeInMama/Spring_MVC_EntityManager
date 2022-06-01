@@ -1,9 +1,7 @@
 package com.usercontrol.web.service;
 
 import com.usercontrol.web.entity.User;
-import com.usercontrol.web.repository.UserRepository;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -18,9 +16,6 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-    @Autowired
-    UserRepository repository;
-
     @PersistenceContext
     EntityManager em;
 
@@ -32,15 +27,11 @@ public class UserServiceImpl implements UserService {
         CriteriaQuery<User> all = cq.select(rootEntry);
         TypedQuery<User> allQuery = em.createQuery(all);
         return allQuery.getResultList();
-
-        //return repository.findAll();
     }
 
     @Override
     public User getById(long id) {
         return em.find(User.class, id);
-
-        //return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -54,15 +45,11 @@ public class UserServiceImpl implements UserService {
         }
 
         session.close();
-
-        //repository.saveAndFlush(user);
     }
 
     @Override
     public void removeById(long id) {
         em.remove(em.find(User.class, id));
         em.flush();
-//        repository.deleteById(id);
-//        repository.flush();
     }
 }
