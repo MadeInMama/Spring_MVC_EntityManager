@@ -24,6 +24,7 @@ public class UserController {
 
         model.addAttribute("users", new User[]{user});
         model.addAttribute("new", new User());
+        model.addAttribute("back", true);
 
         return "users";
     }
@@ -32,6 +33,7 @@ public class UserController {
     public String getAllUsers(ModelMap model) {
         model.addAttribute("users", userService.getAll());
         model.addAttribute("new", new User());
+        model.addAttribute("back", false);
 
         return "users";
     }
@@ -46,7 +48,7 @@ public class UserController {
     @PostMapping(value = "/save")
     public String saveUser(@ModelAttribute User user) {
         userService.save(user);
-        
+
         return "redirect:/users/get";
     }
 }

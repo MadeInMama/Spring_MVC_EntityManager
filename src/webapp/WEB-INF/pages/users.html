@@ -5,6 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
+
+    <style>
+        * {
+            margin-bottom: 4px;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,6 +20,7 @@
         <input th:name="name" th:value="${user.name}">
         <input type="submit" value="Submit">
         <a th:href="@{/users/delete/{id}(id=${user.id})}">Delete</a>
+        <a th:href="@{/users/get/{id}(id=${user.id})}">Open</a>
     </form>
 </th:block>
 
@@ -21,5 +28,8 @@
     <input th:field="*{new.name}">
     <input type="submit" value="Submit">
 </form>
+
+<a th:href="@{/users/get}" th:if="${back}">Back</a>
+
 </body>
 </html>
